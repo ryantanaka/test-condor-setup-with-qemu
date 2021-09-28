@@ -12,6 +12,28 @@ The following example will illustrate 2 issues encountered when using qemu:
 1. procd had to be disabled on aarch64 execute node
 2. file transfers don't work between aarch64 execute node and x86_64 submit node
 
+## Files
+```
+├── condor8.8-arm64-worker     
+│   ├── 10-htcondor.conf    <--- contains configs
+│   ├── 50-test-setup.conf  <--- contains configs
+│   ├── condor-packages
+│   │   ├── htcondor_8.8.13-1+deb10u0_arm64.deb
+│   │   ├── libclassad14_8.8.13-1+deb10u0_arm64.deb
+│   │   └── libclassad-dev_8.8.13-1+deb10u0_arm64.deb
+│   ├── Dockerfile
+│   └── supervisord.conf
+├── condor9.1               <--- Dockerfiles for condor9 containers (official HTCondor containers + some configs)
+│   ├── central-manager
+│   │   └── Dockerfile
+│   ├── execute
+│   │   └── Dockerfile
+│   └── submit
+│       └── Dockerfile
+├── docker-compose.yml  
+└── README.md
+```
+
 ## Requirements
 - Docker
 - Docker Compose
