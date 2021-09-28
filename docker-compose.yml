@@ -1,0 +1,47 @@
+version: "3.5"
+services:
+   cm:
+      image: ryantanaka/condor-cm:latest
+      container_name: cm
+      restart: always
+      networks:
+        - condor_net
+      environment:
+        - USE_POOL_PASSWORD=yes
+        - CONDOR_HOST=cm
+   submit:
+      depends_on:
+         - cm
+      image: ryantanaka/condor-submit
+      container_name: submit
+      restart: always
+      networks:
+         - condor_net
+      environment:
+        - USE_POOL_PASSWORD=yes
+        - CONDOR_HOST=cm
+   x86_64-worker:
+      depends_on:
+         - cm
+      image: ryantanaka/condor-execute
+      container_name: x86_64-worker
+      restart: always
+      networks:
+         - condor_net
+      environment:
+        - USE_POOL_PASSWORD=yes
+        - CONDOR_HOST=cm
+   aarch64-worker:
+      depends_on:
+        - cm
+      image: ryantanaka/condor8-arm64-worker
+      container_name: aarch64-worker
+      restart: always
+      networks:
+        - condor_net
+      volumes:
+        - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static
+networks:
+   condor_net:
+      name: condor_net
+      driver: bridge
