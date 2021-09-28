@@ -63,7 +63,7 @@ slot1@ace26a7179c0 LINUX      aarch64 Unclaimed Idle      0.000 31720  0+00:17:4
 
          Total     2     0       0         2       0          0        0      0
 ```
-5. Change the `submituser` with `su - submituser` and `cd /home/submituser/demo`.
+5. Switch from root to `submituser` with `su - submituser` and `cd /home/submituser/demo`.
 6. Run `condor_submit job.sub` to submit a shell script which will run `cat /etc/os-release`
     on the x86_64 execute node. This should succeed.
 7. Add `requirements = Arch == "aarch64"` to `job.sub`. Run `condor_submit job.sub`.
